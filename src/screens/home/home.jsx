@@ -23,7 +23,7 @@ export default function Home() {
     <Login />
   ) : (
     <BrowserRouter>
-      <div className="main-body">
+      <div className="main-bod">
         <Sidebar />
         <Routes>
           <Route path="/" element={<Library />} />
