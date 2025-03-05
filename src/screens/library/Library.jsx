@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./libary.css";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { IconContext } from "react-icons";
-
-// const clientID = "7c01e8c6b889469f8ea725dce16da227";
-// const redirectUrl = "http://localhost:5173/";
-// const SCOPES = ["playlist-read-private", "user-library-read"].join("%20");
+import { useNavigate } from "react-router-dom";
 
 export default function Library() {
   const [playlists, setPlaylists] = useState([]);
@@ -30,11 +27,21 @@ export default function Library() {
       .catch((error) => console.error("Error fetching playlists:", error));
   }, []);
 
+  const navigate = useNavigate();
+
+  const playPlayList = (id) => {
+    navigate("/player", { state: { id: id } });
+  };
+
   return (
     <div className="screen-container">
       <div className="library-body">
         {playlists.map((playlist) => (
-          <div className="playlist-card" key={playlist.id}>
+          <div
+            className="playlist-card"
+            key={playlist.id}
+            onClick={() => playPlayList(playlist.id)}
+          >
             <img
               src={playlist.images[0].url}
               className="playlist-image"
